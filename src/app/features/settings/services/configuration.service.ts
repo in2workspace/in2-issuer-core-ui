@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import {SignatureConfigPayload} from '../models/signature.models';
+import {SignatureConfigPayload} from '../models/configuration.models';
 import { ConfigurationRepository } from './configuration.repository';
 import {  map, Observable } from 'rxjs';
 

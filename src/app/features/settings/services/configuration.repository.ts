@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {SignatureConfigPayload} from '../models/signature.models'
+import {SignatureConfigPayload} from '../models/configuration.models'
 import {API_PATH} from 'src/app/core/constants/api-paths.constants';
 import { environment } from 'src/environments/environment';
 @Injectable({ providedIn: 'root' })

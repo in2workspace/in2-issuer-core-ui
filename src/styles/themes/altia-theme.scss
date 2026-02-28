@@ -25,32 +25,33 @@
 // Deactivated theme, it is selected via configuration through THEME_NAME variable
 
 // Main palette color, also used in other variables
-$primary-color: #184bff;
+// Altia brand: #184BFF — from altiacompany.com
+$primary-color: #184BFF;
 // Used in navbar
 $primary-contrast-color: #ffffff;
 // Used in landing page buttons and as hover color in management table
-$secondary-color: #00fe94;
+$secondary-color: #00FF94;
 $secondary-contrast-color: #000000;
 
 @include mat.core();
 
 
-//Palette for Angular Material components
+//Palette for Angular Material components — derived from Altia primary #184BFF
 $custom-palette: (
-  50: #e5edf9,
-  100: #cad9f3,
-  200: #9cb8eb,
-  300: #7097e2,
-  400: #4a75d3,
+  50: #e8edff,
+  100: #c5d2ff,
+  200: #9cb4ff,
+  300: #6d96ff,
+  400: #4a7fff,
   500: $primary-color,
-  600: #25468b,
-  700: #1d3673,
-  800: #162a5b,
-  900: #0f1d40,
-  A100: #cad9f3,
-  A200: #9cb8eb,
-  A400: #4a75d3,
-  A700: #1d3673,
+  600: #1340e6,
+  700: #1D3EB6,
+  800: #132153,
+  900: #0B1438,
+  A100: #6DA4FF,
+  A200: #4a7fff,
+  A400: #1340e6,
+  A700: #1D3EB6,
   contrast: (
     50: rgba(black, 0.87),
     100: rgba(black, 0.87),

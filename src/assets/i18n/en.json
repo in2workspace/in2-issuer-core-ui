@@ -29,7 +29,6 @@
   "sidenav": {
     "settings": "Settings",
     "schemes": "Schemes",
-    "signatures": "Signatures",
     "trushFramework": "TF"
   },
   "mandator": {
@@ -324,46 +323,6 @@
     "delete": "Delete",
     "save": "Save",
     "loading-default-title": "Please wait while the process is completed..."
-  },
-  "signature": {
-    "settings": {
-      "title": "Signature Configuration",
-      "enableRemote": "Enable remote signature",
-      "save": "Save",
-      "mode": {
-        "CLOUD": "Cloud",
-        "SERVER": "Server"
-      },
-      "table": {
-        "providerId": "Provider",
-        "credentialName": "Credential name",
-        "actions": "Actions",
-        "addCredential": "Add credential"
-      },
-      "modal": {
-          "delete": {
-            "title": "Delete credential",
-            "message": "Are you sure you want to delete this credential?"
-          },
-          "edit": {
-            "title": "Edit credential"
-          },
-          "create": {
-            "title": "Add credential"
-          }
-        },
-      "formCloudPrivider": {
-        "cloudProvider": "Cloud Provider",
-        "credentialName": "Credential Name",
-        "clientId": "Client ID",
-        "clientSecret": "Client Secret",
-        "credentialId": "Credential ID",
-        "credentialPassword": "Credential Password",
-        "secret": "Secret (TOTP)",
-        "rationale": "Reason"
-      }
-      
-    }
   },
   "keys": {
     "title": "Private Key",
