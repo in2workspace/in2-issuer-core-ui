@@ -1,13 +1,4 @@
 import * as runtimeTheme from './theme-loader';
-
-// Mock the Angular environment import used by the module under test.
-jest.mock('../../../environments/environment', () => ({
-  environment: {
-    customizations: undefined,
-  },
-}));
-
-import { environment } from '../../../environments/environment';
 import { applyInitialTheme } from './theme-loader';
 
 describe('runtime theme functions', () => {
@@ -17,63 +8,22 @@ describe('runtime theme functions', () => {
     // Clean DOM between tests.
     document.head.innerHTML = '';
     document.body.innerHTML = '';
-    // Reset mocked environment to default state.
-    (environment as any).customizations = undefined;
     jest.restoreAllMocks();
   });
 
   describe('getInitialThemeBundleName', () => {
-    it('returns default-theme when environment.customizations is undefined', () => {
+    it('always returns default-theme', () => {
       expect(runtimeTheme.getInitialThemeName()).toBe('default-theme');
-    });
-
-    it('returns default-theme when environment.customizations.theme_name is undefined', () => {
-      (environment as any).customizations = {};
-      expect(runtimeTheme.getInitialThemeName()).toBe('default-theme');
-    });
-
-    it('returns the configured theme_name when present', () => {
-      (environment as any).customizations = { theme_name: 'my-theme' };
-      expect(runtimeTheme.getInitialThemeName()).toBe('my-theme');
-    });
-
-    it('returns empty string if theme_name is an empty string (no fallback)', () => {
-      (environment as any).customizations = { theme_name: '' };
-      expect(runtimeTheme.getInitialThemeName()).toBe('');
     });
   });
 
   describe('applyInitialTheme', () => {
-    it('applies default-theme when no customization exists', () => {
+    it('applies default-theme', () => {
       applyInitialTheme();
 
       const link = document.head.querySelector<HTMLLinkElement>(`link#${THEME_LINK_ID}`);
       expect(link).not.toBeNull();
       expect(link!.getAttribute('href')).toBe('/default-theme.css');
-    });
-
-    it('applies environment custom theme_name when provided', () => {
-      (environment as any).customizations = { theme_name: 'bundle-x' };
-
-      applyInitialTheme();
-
-      const link = document.head.querySelector<HTMLLinkElement>(`link#${THEME_LINK_ID}`);
-      expect(link).not.toBeNull();
-      expect(link!.getAttribute('href')).toBe('/bundle-x.css');
-    });
-
-    it('uses <base href> when present', () => {
-      (environment as any).customizations = { theme_name: 'bundle-x' };
-
-      const base = document.createElement('base');
-      base.setAttribute('href', '/app/');
-      document.head.appendChild(base);
-
-      applyInitialTheme();
-
-      const link = document.head.querySelector<HTMLLinkElement>(`link#${THEME_LINK_ID}`);
-      expect(link).not.toBeNull();
-      expect(link!.getAttribute('href')).toBe('/app/bundle-x.css');
     });
   });
 

@@ -9,8 +9,7 @@ import { UnicodeValidatorDirective } from './unicode-validator.directive';
       <input type="text" [formControl]="unicodeControl" appUnicodeValidator />
     </form>
   `,
-    standalone: true,
-  imports: [ReactiveFormsModule, UnicodeValidatorDirective],
+    imports: [ReactiveFormsModule, UnicodeValidatorDirective]
 })
 class TestComponent {
   unicodeControl = new FormControl('');

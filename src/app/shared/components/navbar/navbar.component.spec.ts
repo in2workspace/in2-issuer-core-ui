@@ -8,6 +8,7 @@ import { of } from 'rxjs';
 import { MatMenuModule } from '@angular/material/menu';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { OverlayContainer } from '@angular/cdk/overlay';
+import { ThemeService } from 'src/app/core/services/theme.service';
 
 class MockAuthService {
   getMandator() {
@@ -51,6 +52,7 @@ describe('NavbarComponent', () => {
         { provide: AuthService, useClass: MockAuthService },
         { provide: Router, useClass: MockRouter },
         { provide: ActivatedRoute, useValue: {} },
+        { provide: ThemeService, useValue: { snapshot: { branding: { logoUrl: null } } } },
     ],
 }).compileComponents();
   });

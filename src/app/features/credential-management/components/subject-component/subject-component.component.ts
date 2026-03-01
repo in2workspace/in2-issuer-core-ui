@@ -9,10 +9,9 @@ import { MatTooltip } from '@angular/material/tooltip';
  * the corresponding handler to map (i. e. label credentials extract uuid)
  */
 @Component({
-  selector: 'app-subject',
-  standalone: true,
-  imports: [CommonModule, MatTooltip],
-  template: `
+    selector: 'app-subject',
+    imports: [CommonModule, MatTooltip],
+    template: `
     <span [matTooltip]="subject$()">{{ displayValue$() }}</span>
   `
 })

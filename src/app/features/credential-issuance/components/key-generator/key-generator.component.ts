@@ -10,12 +10,11 @@ import { IssuanceCustomFormChildWithAlert } from 'src/app/features/credential-de
 import { FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'app-key-generator',
-  standalone: true,
-  imports: [KeyValuePipe, MatButton, MatIcon, MatTooltip, TranslatePipe],
-  providers: [KeyGeneratorService],
-  templateUrl: './key-generator.component.html',
-  styleUrl: './key-generator.component.scss'
+    selector: 'app-key-generator',
+    imports: [KeyValuePipe, MatButton, MatIcon, MatTooltip, TranslatePipe],
+    providers: [KeyGeneratorService],
+    templateUrl: './key-generator.component.html',
+    styleUrl: './key-generator.component.scss'
 })
 export class KeyGeneratorComponent extends IssuanceCustomFormChildWithAlert<FormGroup<KeyForm>> implements OnInit, OnDestroy{
   public keyState$: Signal<KeyState | undefined>;

@@ -31,55 +31,48 @@ import { AddPrefixPipe } from 'src/app/shared/pipes/add-prefix.pipe';
     selector: 'app-credential-management',
     templateUrl: './credential-management.component.html',
     styleUrls: ['./credential-management.component.scss'],
-    standalone: true,
     imports: [
-    FormsModule,
-    MatButton,
-    MatButtonModule,
-    MatTable,
-    MatSort,
-    MatColumnDef,
-    MatFormField,
-    MatHeaderCellDef,
-    MatHeaderCell,
-    MatIcon,
-    MatInputModule,
-    MatLabel,
-    MatSortHeader,
-    MatCellDef,
-    MatCell,
-    MatHeaderRowDef,
-    MatHeaderRow,
-    MatRowDef,
-    MatRow,
-    NgClass,
-    MatPaginator,
-    DatePipe,
-    SubjectComponent,
-    TranslatePipe,
-    CapitalizePipe,
-    AddPrefixPipe
-],
-    animations: [
-      trigger('openClose', [
-        state(
-          'open',
-          style({
-            width: '200px',
-            opacity: 1,
-          })
-        ),
-        state(
-          'closed',
-          style({
-            width: '0px',
-            opacity: 0,
-          })
-        ),
-        transition('open => closed', [animate('0.2s')]),
-        transition('closed => open', [animate('0.2s')]),
-      ]),
+        FormsModule,
+        MatButton,
+        MatButtonModule,
+        MatTable,
+        MatSort,
+        MatColumnDef,
+        MatFormField,
+        MatHeaderCellDef,
+        MatHeaderCell,
+        MatIcon,
+        MatInputModule,
+        MatLabel,
+        MatSortHeader,
+        MatCellDef,
+        MatCell,
+        MatHeaderRowDef,
+        MatHeaderRow,
+        MatRowDef,
+        MatRow,
+        NgClass,
+        MatPaginator,
+        DatePipe,
+        SubjectComponent,
+        TranslatePipe,
+        CapitalizePipe,
+        AddPrefixPipe
     ],
+    animations: [
+        trigger('openClose', [
+            state('open', style({
+                width: '200px',
+                opacity: 1,
+            })),
+            state('closed', style({
+                width: '0px',
+                opacity: 0,
+            })),
+            transition('open => closed', [animate('0.2s')]),
+            transition('closed => open', [animate('0.2s')]),
+        ]),
+    ]
 })
 export class CredentialManagementComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) public paginator!: MatPaginator;

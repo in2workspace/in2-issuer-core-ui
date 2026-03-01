@@ -1,6 +1,7 @@
 import { Component, computed, EventEmitter, input, Output } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { QRCodeComponent } from 'angularx-qrcode';
+import { MatIcon } from '@angular/material/icon';
 import { environment } from 'src/environments/environment';
 import { KNOWLEDGEBASE_PATH } from 'src/app/core/constants/knowledge.constants';
 
@@ -8,11 +9,12 @@ import { KNOWLEDGEBASE_PATH } from 'src/app/core/constants/knowledge.constants';
     selector: 'app-credential-offer',
     templateUrl: './credential-offer.component.html',
     styleUrls: ['./credential-offer.component.scss'],
-    imports: [QRCodeComponent, TranslatePipe]
+    imports: [QRCodeComponent, TranslatePipe, MatIcon]
 })
 export class CredentialOfferComponent{
   @Output() public refreshCredential = new EventEmitter<void>();
   public qrColor = "#2d58a7";
+  public copied = false;
   public walletUsersGuideUrl = environment.knowledge_base_url + KNOWLEDGEBASE_PATH.WALLET;
   public credentialOfferUri$ = input.required<string>();
 
@@ -45,6 +47,12 @@ export class CredentialOfferComponent{
       return oid4vciUri;
     }
   }
+
+public copyQrContent(): void {
+  navigator.clipboard.writeText(this.credentialOfferUri$());
+  this.copied = true;
+  setTimeout(() => this.copied = false, 2000);
+}
 
 public onRefreshCredentialClick(event:Event): void{
   event.preventDefault();

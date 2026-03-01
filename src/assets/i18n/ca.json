@@ -159,6 +159,8 @@
       "title": "Escaneja el codi QR per iniciar sessió i accedir al Wallet Digital.",
       "test-purposes": "Per fer fer proves, accedeix al "
     },
+    "copy-qr": "Copiar contingut del QR",
+    "copied": "Copiat!",
     "second-step": {
       "title": "Escaneja el codi QR per obtenir la credencial.",
       "directly": "directament",

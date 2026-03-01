@@ -1,10 +1,13 @@
-import { environment } from '../../../environments/environment';
+/**
+ * @deprecated Theme loading is now handled by ThemeService via APP_INITIALIZER.
+ * This module is kept for backward compatibility but is no longer used at startup.
+ */
 
 const DEFAULT_THEME_NAME = 'default-theme';
 const THEME_LINK_ID = 'runtime-theme';
 
 export function getInitialThemeName(): string {
-  return environment.customizations?.theme_name ?? DEFAULT_THEME_NAME;
+  return DEFAULT_THEME_NAME;
 }
 
 export function applyInitialTheme(): void {

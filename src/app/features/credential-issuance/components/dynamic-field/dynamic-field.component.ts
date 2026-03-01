@@ -16,23 +16,22 @@ import { CredentialIssuanceViewModelControlField, CredentialIssuanceViewModelFie
  * - If the field schema type is 'group', it iterates over the child fields and renders them recusively (calling the dynamic component itself)
  */
 @Component({
-  selector: 'app-dynamic-field',
-  standalone: true,
-  imports: [
-    AddAsteriskDirective,
-    NgComponentOutlet,
-    MatError,
-    MatFormField,
-    MatInput,
-    MatLabel,
-    MatOption,
-    MatSelect,
-    ReactiveFormsModule, 
-    TitleCasePipe,
-    TranslatePipe,
-  ],
-  templateUrl: './dynamic-field.component.html',
-  styleUrl: './dynamic-field.component.scss'
+    selector: 'app-dynamic-field',
+    imports: [
+        AddAsteriskDirective,
+        NgComponentOutlet,
+        MatError,
+        MatFormField,
+        MatInput,
+        MatLabel,
+        MatOption,
+        MatSelect,
+        ReactiveFormsModule,
+        TitleCasePipe,
+        TranslatePipe,
+    ],
+    templateUrl: './dynamic-field.component.html',
+    styleUrl: './dynamic-field.component.scss'
 })
 export class DynamicFieldComponent {
   public fieldSchema$ = input.required<CredentialIssuanceViewModelField>();

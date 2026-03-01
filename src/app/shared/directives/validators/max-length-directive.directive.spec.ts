@@ -8,8 +8,7 @@ import { By } from '@angular/platform-browser';
     template: `
     <input [(ngModel)]="inputValue" appMaxLength="5" />
   `,
-    standalone: true,
-  imports: [FormsModule, MaxLengthDirective],
+    imports: [FormsModule, MaxLengthDirective]
 })
 class TestComponent {
   inputValue = '';

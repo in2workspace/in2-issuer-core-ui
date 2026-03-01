@@ -8,16 +8,15 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 export const compliantCredentialsToken = new InjectionToken<CompliantCredential[] | null>('COMPLIANT_CREDENTIALS_DATA');
 
 @Component({
-  selector: 'app-compliant-credentials',
-  standalone: true,
-  imports: [
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
-    TranslatePipe
-  ],
-  templateUrl: './compliant-credentials.component.html',
-  styleUrl: './compliant-credentials.component.scss'
+    selector: 'app-compliant-credentials',
+    imports: [
+        MatTableModule,
+        MatPaginatorModule,
+        MatSortModule,
+        TranslatePipe
+    ],
+    templateUrl: './compliant-credentials.component.html',
+    styleUrl: './compliant-credentials.component.scss'
 })
 export class CompliantCredentialsComponent implements AfterViewInit {
   @ViewChild(MatPaginator) public paginator?: MatPaginator;

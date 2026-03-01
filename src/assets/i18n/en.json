@@ -158,6 +158,8 @@
       "title": "Scan the QR code to log in and access the Digital Wallet.",
       "test-purposes": "For testing purposes, access the "
     },
+    "copy-qr": "Copy QR content",
+    "copied": "Copied!",
     "second-step": {
       "title": "Scan the QR code to obtain the credential.",
       "directly": "directly",

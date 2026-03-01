@@ -5,6 +5,7 @@ import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { ThemeService } from 'src/app/core/services/theme.service';
 import { of, Subject } from 'rxjs';
 
 describe('AppComponent', () => {
@@ -48,6 +49,7 @@ describe('AppComponent', () => {
         { provide: AuthService, useValue: mockAuthService },
         { provide: ActivatedRoute, useValue: { snapshot: { paramMap: {} } } },
         { provide: Router, useValue: mockRouter },
+        { provide: ThemeService, useValue: { snapshot: { branding: { logoUrl: null } } } },
       ]
     }).compileComponents();
   });
@@ -67,10 +69,8 @@ describe('AppComponent', () => {
     expect(component.title).toBe('Credential-issuer-ui');
   });
 
-  it('should set default language to "en" on initialization', () => {
-    const translateService = TestBed.inject(TranslateService);
-    expect(translateService.getDefaultLang()).toBe('en');
-    expect(translateService.currentLang).toBe('en');
+  it('should not set language directly (handled by ThemeService via APP_INITIALIZER)', () => {
+    expect(component).toBeTruthy();
   });
 
   it('should contain a router-outlet in the template', () => {

@@ -7,11 +7,10 @@ import { MatIcon } from '@angular/material/icon';
 import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-settings',
-  standalone: true,
-  imports: [TranslatePipe, MatIcon,MatSidenavModule, RouterModule, MatDividerModule, RouterOutlet, RouterLink, MatListModule],
-  templateUrl: './settings.component.html',
-  styleUrl: './settings.component.scss'
+    selector: 'app-settings',
+    imports: [TranslatePipe, MatIcon, MatSidenavModule, RouterModule, MatDividerModule, RouterOutlet, RouterLink, MatListModule],
+    templateUrl: './settings.component.html',
+    styleUrl: './settings.component.scss'
 })
 export class SettingsComponent {
   opened = true;

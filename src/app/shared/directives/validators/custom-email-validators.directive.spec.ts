@@ -9,8 +9,7 @@ import { CustomEmailValidatorDirective } from './custom-email-validator.directiv
       <input type="email" [formControl]="emailControl" appEmailValidator />
     </form>
   `,
-    standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, CustomEmailValidatorDirective],
+    imports: [ReactiveFormsModule, FormsModule, CustomEmailValidatorDirective]
 })
 class TestComponent {
   emailControl = new FormControl('');

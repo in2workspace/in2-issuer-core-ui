@@ -1,5 +1,5 @@
 # Stage 0, "build-stage", based on Node.js, to build and compile the frontend
-FROM node:22.11.0 AS build-stage
+FROM node:22-alpine AS build-stage
 WORKDIR /app
 #Copy package.json and package-lock.json
 COPY package*.json /app/

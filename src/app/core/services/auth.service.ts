@@ -5,6 +5,7 @@ import { catchError, filter, take, tap } from 'rxjs/operators';
 import { UserDataAuthenticationResponse } from "../models/dto/user-data-authentication-response.dto";
 import { Power, EmployeeMandator, LEARCredentialEmployee } from "../models/entity/lear-credential";
 import { RoleType } from '../models/enums/auth-rol-type.enum';
+import { IAM_POST_LOGIN_ROUTE } from '../constants/iam.constants';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
 import { LEARCredentialDataNormalizer } from 'src/app/features/credential-details/utils/lear-credential-data-normalizer';
@@ -116,6 +117,10 @@ export class AuthService{
         if(this.getRole(userData) != RoleType.LEAR)  throw new Error('Error Role. '+ this.getRole(userData));
         this.userDataSubject.next(userData);
         this.handleUserAuthentication(userData);
+
+        if (this.router.url === '/' || this.router.url.startsWith('/home')) {
+          this.router.navigate([IAM_POST_LOGIN_ROUTE]);
+        }
       }else{
           console.warn('Checking authentication: not authenticated.');
       }
@@ -151,18 +156,33 @@ export class AuthService{
      //Future work: when accessing with certificate update signal role LER and  handleCertificateLogin
       try{
         const learCredential = this.extractVCFromUserData(userData);
+        console.debug('[AUTH] Extracted VC:', JSON.stringify(learCredential, null, 2));
         const normalizedCredential = this.normalizer.normalizeLearCredential(learCredential) as LEARCredentialEmployee;
+        console.debug('[AUTH] Normalized VC:', JSON.stringify(normalizedCredential, null, 2));
         this.handleVCLogin(normalizedCredential);
-      } 
+        console.debug('[AUTH] User powers after handleVCLogin:', JSON.stringify(this.userPowers, null, 2));
+      }
       catch(error){
         console.error(error);
       }
   }
 
-  //Future work: when role access is configured
-  private getRole(userData: UserDataAuthenticationResponse):RoleType|null{
+  private getRole(userData: UserDataAuthenticationResponse): RoleType | null {
     if (userData.role) {
       return userData.role;
+    }
+    // Derive role from credential type when not provided as explicit claim
+    try {
+      const vc = this.extractVCFromUserData(userData);
+      const types: string[] = (vc as unknown as Record<string, unknown>)?.['type'] as string[] ?? [];
+      if (types.includes('LEARCredentialEmployee')) {
+        return RoleType.LEAR;
+      }
+      if (types.includes('LEARCredentialMachine')) {
+        return RoleType.LER;
+      }
+    } catch {
+      // VC not available yet
     }
     return null;
   }
@@ -243,11 +263,13 @@ export class AuthService{
       .pipe(take(1))
       .subscribe(({ isAuthenticated, userData, accessToken }) => {
         if (isAuthenticated ) {
-          if(!userData?.role && !userData?.vc){
+          let learCredential: LEARCredentialEmployee;
+          try {
+            learCredential = this.extractVCFromUserData(userData);
+          } catch {
             this.logout();
             return;
-          } 
-          const learCredential = this.extractVCFromUserData(userData);
+          }
 
           if(learCredential!=null){
             const normalizedCredential = this.normalizer.normalizeLearCredential(learCredential) as LEARCredentialEmployee;
@@ -290,11 +312,16 @@ export class AuthService{
     return this.nameSubject.asObservable()
   }
 
-  private extractVCFromUserData(userData: UserDataAuthenticationResponse) {
-    if(!userData?.vc){
-      throw new Error('VC claim error.')
+  private extractVCFromUserData(userData: UserDataAuthenticationResponse): LEARCredentialEmployee {
+    // Support both 'vc' (object, from Keycloak) and 'vc_json' (string, from verifier)
+    if (userData?.vc) {
+      return userData.vc;
     }
-    return userData.vc;
+    const vcJson = (userData as unknown as Record<string, unknown>)?.['vc_json'];
+    if (vcJson && typeof vcJson === 'string') {
+      return JSON.parse(vcJson) as LEARCredentialEmployee;
+    }
+    throw new Error('VC claim error: neither vc nor vc_json found in userData.');
   }
 
   private extractUserPowers(learCredential: LEARCredentialEmployee): Power[] {

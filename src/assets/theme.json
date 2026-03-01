@@ -1,0 +1,23 @@
+{
+  "branding": {
+    "name": "Credential Issuer",
+    "primaryColor": "#184BFF",
+    "primaryContrastColor": "#ffffff",
+    "secondaryColor": "#00FF94",
+    "secondaryContrastColor": "#000000",
+    "logoUrl": null,
+    "faviconUrl": null
+  },
+  "content": {
+    "links": [],
+    "footer": null,
+    "knowledgeBaseUrl": null,
+    "walletUrl": null,
+    "walletUrlTest": null,
+    "showWalletUrlTest": false
+  },
+  "i18n": {
+    "defaultLang": "en",
+    "available": ["en", "es", "ca"]
+  }
+}

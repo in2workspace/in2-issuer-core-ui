@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { environment } from 'src/environments/environment';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { ThemeService } from 'src/app/core/services/theme.service';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -21,6 +22,12 @@ describe('HomeComponent', () => {
       logout: jest.fn(),
     } as unknown as jest.Mocked<AuthService>;
 
+    const themeServiceMock = {
+      snapshot: {
+        branding: { logoUrl: 'https://example.com/logo.png' }
+      }
+    };
+
     TestBed.configureTestingModule({
       imports: [
         HomeComponent,
@@ -30,6 +37,7 @@ describe('HomeComponent', () => {
         TranslateService,
         { provide: Router, useValue: routerMock },
         { provide: AuthService, useValue: authServiceMock },
+        { provide: ThemeService, useValue: themeServiceMock },
       ],
     });
 
@@ -43,10 +51,8 @@ describe('HomeComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should get logo source', () => {
-    expect(component.logoSrc).toBe(
-      environment.customizations.assets.base_url + "/" + environment.customizations.assets.logo_path
-    );
+  it('should get logo source from theme', () => {
+    expect(component.logoSrc).toBe('https://example.com/logo.png');
   });
 
   it('should set walletUrl and knowledge_base_url from environment', () => {

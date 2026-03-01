@@ -157,6 +157,8 @@
       "title": "Escanea el código QR para iniciar sesión y acceder al Wallet Digital.",
       "test-purposes": "Para propósitos de prueba, accede al "
     },
+    "copy-qr": "Copiar contenido del QR",
+    "copied": "¡Copiado!",
     "second-step": {
       "title": "Escanea el código QR para obtener la credencial.",
       "directly": "directamente",

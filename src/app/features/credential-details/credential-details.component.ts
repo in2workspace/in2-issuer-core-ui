@@ -23,12 +23,11 @@ import { environment } from 'src/environments/environment';
 
 
 @Component({
-  standalone: true,
-  imports: [AddPrefixPipe, CapitalizePipe, CommonModule, CustomTooltipDirective, FormsModule, MatButton, MatCard, MatCardContent, MatFormField, MatIcon, MatInput, MatLabel, PortalModule, ReactiveFormsModule, RouterLink, TranslatePipe ],
-  providers:[CredentialDetailsService],
-  selector: 'app-credential-details',
-  templateUrl: './credential-details.component.html',
-  styleUrl: './credential-details.component.scss'
+    imports: [AddPrefixPipe, CapitalizePipe, CommonModule, CustomTooltipDirective, FormsModule, MatButton, MatCard, MatCardContent, MatFormField, MatIcon, MatInput, MatLabel, PortalModule, ReactiveFormsModule, RouterLink, TranslatePipe],
+    providers: [CredentialDetailsService],
+    selector: 'app-credential-details',
+    templateUrl: './credential-details.component.html',
+    styleUrl: './credential-details.component.scss'
 })
 export class CredentialDetailsComponent implements OnInit {
   

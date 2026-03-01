@@ -19,12 +19,11 @@ import { CredentialIssuanceViewModelSchemaWithId, IssuanceCredentialType, Issuan
  * - If the form has been touched, an alert is shown if the user tries to change the selected type or leave the page
  */
 @Component({
-  selector: 'app-credential-issuance',
-  standalone: true,
-  providers: [CredentialIssuanceService],
-  imports: [CommonModule, KeyValuePipe, ReactiveFormsModule, DynamicFieldComponent, MatButton, MatCard, MatCardContent, MatFormField, MatLabel, MatOption, MatSelect, RouterLink, TitleCasePipe, TranslatePipe],
-  templateUrl: './credential-issuance.component.html',
-  styleUrl: './credential-issuance.component.scss'
+    selector: 'app-credential-issuance',
+    providers: [CredentialIssuanceService],
+    imports: [CommonModule, KeyValuePipe, ReactiveFormsModule, DynamicFieldComponent, MatButton, MatCard, MatCardContent, MatFormField, MatLabel, MatOption, MatSelect, RouterLink, TitleCasePipe, TranslatePipe],
+    templateUrl: './credential-issuance.component.html',
+    styleUrl: './credential-issuance.component.scss'
 })
 export class CredentialIssuanceComponent implements CanDeactivate<CanComponentDeactivate>{
   

@@ -1,5 +1,5 @@
 import { AutoLoginPartialRoutesGuard } from 'angular-auth-oidc-client';
-import { routes } from './app-routing';
+import { routes } from './app.routes';
 import { basicGuard, settingsGuard } from './core/guards/accessLevel.guard';
 
 describe('App Routes', () => {

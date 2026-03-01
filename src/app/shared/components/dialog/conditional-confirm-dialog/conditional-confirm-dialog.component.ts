@@ -12,20 +12,20 @@ import { PortalModule } from '@angular/cdk/portal';
 
 // This dialog has a checkbox that must be filled to confirm
 @Component({
-  selector: 'app-conditional-confirm-dialog',
-  standalone: true,
-  imports: [
-    CommonModule,
-    MatButtonModule, 
-    MatCheckboxModule, 
-    MatDialogTitle,
-    MatDialogContent,
-    MatDialogActions, 
-    MatProgressSpinnerModule,
-    PortalModule,
-    TranslatePipe],
-  templateUrl: './conditional-confirm-dialog.component.html',
-  styleUrl: './conditional-confirm-dialog.component.scss',
+    selector: 'app-conditional-confirm-dialog',
+    imports: [
+        CommonModule,
+        MatButtonModule,
+        MatCheckboxModule,
+        MatDialogTitle,
+        MatDialogContent,
+        MatDialogActions,
+        MatProgressSpinnerModule,
+        PortalModule,
+        TranslatePipe
+    ],
+    templateUrl: './conditional-confirm-dialog.component.html',
+    styleUrl: './conditional-confirm-dialog.component.scss'
 })
 export class ConditionalConfirmDialogComponent extends AbstractDialogComponent<ConditionalConfirmDialogData> {
   public isLoading$ = inject(LoaderService).isLoading$;

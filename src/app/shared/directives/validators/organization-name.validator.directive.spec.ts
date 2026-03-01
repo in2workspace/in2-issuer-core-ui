@@ -9,8 +9,7 @@ import { OrganizationNameValidatorDirective } from './organization-name.validato
       <input type="text" [formControl]="orgNameControl" appOrgNameValidator />
     </form>
   `,
-    standalone: true,
-  imports: [ReactiveFormsModule, OrganizationNameValidatorDirective],
+    imports: [ReactiveFormsModule, OrganizationNameValidatorDirective]
 })
 class TestComponent {
   orgNameControl = new FormControl('');

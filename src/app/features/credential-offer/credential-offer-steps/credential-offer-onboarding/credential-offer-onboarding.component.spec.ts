@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { CredentialOfferOnboardingComponent } from './credential-offer-onboarding.component';
 import { TranslateModule } from '@ngx-translate/core';
-import { QRCodeModule } from 'angularx-qrcode';
+import { QRCodeComponent } from 'angularx-qrcode';
 import { environment } from 'src/environments/environment';
 
 describe('CredentialOfferOnboardingComponent', () => {
@@ -9,7 +9,7 @@ describe('CredentialOfferOnboardingComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [QRCodeModule, TranslateModule.forRoot(), CredentialOfferOnboardingComponent],
+      imports: [QRCodeComponent, TranslateModule.forRoot(), CredentialOfferOnboardingComponent],
     }).compileComponents();
 
     const fixture = TestBed.createComponent(CredentialOfferOnboardingComponent);

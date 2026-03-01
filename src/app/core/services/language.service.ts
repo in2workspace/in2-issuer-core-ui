@@ -1,7 +1,10 @@
 import { inject, Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { environment } from 'src/environments/environment';
 
+/**
+ * @deprecated Language setup is now handled by ThemeService via APP_INITIALIZER.
+ * This service is kept for backward compatibility but is no longer called at startup.
+ */
 @Injectable({
   providedIn: 'root'
 })
@@ -26,21 +29,8 @@ export class LanguageService {
   }
 
   private setDefaultLanguage(){
-    const defaultLang = this.getDefaultLang();
-
-    this.translate.setDefaultLang(defaultLang);
-    this.translate.use(defaultLang);
-  }
-
-  private getDefaultLang(): string{
-    const defaultLangFromEnv = environment.customizations.default_lang;
-
-    if(this.availableLanguages.includes(defaultLangFromEnv)){
-      return defaultLangFromEnv;
-    }else{
-      console.error('Language from env is not available: ' + defaultLangFromEnv);
-      return this.defaultLang;
-    }
+    this.translate.setDefaultLang(this.defaultLang);
+    this.translate.use(this.defaultLang);
   }
 
 private setBrowserLanguage(): string | undefined {

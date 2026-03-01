@@ -8,11 +8,10 @@ import { environment } from 'src/environments/environment';
 export const detailsPowerToken = new InjectionToken<FunctionActions[]>('DETAILS_POWER');
 
 @Component({
-  selector: 'app-details-power',
-  standalone: true,
-  imports: [CapitalizePipe, MatSlideToggle, TranslatePipe],
-  templateUrl: './details-power.component.html',
-  styleUrl: './details-power.component.scss'
+    selector: 'app-details-power',
+    imports: [CapitalizePipe, MatSlideToggle, TranslatePipe],
+    templateUrl: './details-power.component.html',
+    styleUrl: './details-power.component.scss'
 })
 export class DetailsPowerComponent {
   public powers: FunctionActions[] = inject(detailsPowerToken);

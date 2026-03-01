@@ -31,7 +31,6 @@ export type NormalizedAction = { action: string; value: boolean };
     selector: 'app-issuance-power',
     templateUrl: './issuance-power.component.html',
     styleUrls: ['./issuance-power.component.scss'],
-    standalone: true,
     imports: [KeyValuePipe, ReactiveFormsModule, MatFormField, MatSelect, MatSelectTrigger, MatOption, MatButton, MatSlideToggle, FormsModule, MatMiniFabButton, MatIcon, MatLabel, MatSelect, TranslatePipe]
 })
 export class IssuancePowerComponent extends BaseIssuanceCustomFormChild<UntypedFormGroup> implements OnInit{

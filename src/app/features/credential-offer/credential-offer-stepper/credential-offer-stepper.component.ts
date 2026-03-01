@@ -5,7 +5,6 @@ import { CredentialOfferOnboardingComponent } from '../credential-offer-steps/cr
 import { Component, computed, DestroyRef, effect, inject, OnInit, Signal, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatButtonModule } from '@angular/material/button';
-import { QRCodeModule } from 'angularx-qrcode';
 import { MatIcon } from '@angular/material/icon';
 import { catchError, delayWhen, EMPTY, filter, interval, map, merge, Observable, of, scan, shareReplay, startWith, Subject, switchMap, take, takeUntil, tap, throwError, timer } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -52,24 +51,22 @@ export const undefinedCredentialOfferParamsState: CredentialOfferParamsState = {
   export const loadingBufferTimeInMs = 25 * 1000; //margin to compensate for loading time 
 
 @Component({
-  selector: 'app-credential-offer-stepper',
-  standalone: true,
-  imports: [
-    AsyncPipe,
-    CredentialOfferComponent, 
-    CredentialOfferOnboardingComponent,
-    MatButtonModule, 
-    MatIcon, 
-    MatProgressSpinnerModule, 
-    MatStepperModule, 
-    QRCodeModule,
-    TranslatePipe
+    selector: 'app-credential-offer-stepper',
+    imports: [
+        AsyncPipe,
+        CredentialOfferComponent,
+        CredentialOfferOnboardingComponent,
+        MatButtonModule,
+        MatIcon,
+        MatProgressSpinnerModule,
+        MatStepperModule,
+        TranslatePipe
     ],
-  providers: [{
-    provide: STEPPER_GLOBAL_OPTIONS, useValue: {displayDefaultIndicatorType: false}
-}],
-  templateUrl: './credential-offer-stepper.component.html',
-  styleUrl: './credential-offer-stepper.component.scss',
+    providers: [{
+            provide: STEPPER_GLOBAL_OPTIONS, useValue: { displayDefaultIndicatorType: false }
+        }],
+    templateUrl: './credential-offer-stepper.component.html',
+    styleUrl: './credential-offer-stepper.component.scss'
 })
 export class CredentialOfferStepperComponent implements OnInit{
   @ViewChild('popupCountdown') popupCountdown!: TemplateRef<any>;

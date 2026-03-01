@@ -6,7 +6,7 @@
   min-height: 100vh;
 
   .container-nav {
-    background: var(--primary-custom-color);
+    background: var(--primary-color);
     padding: 1rem 0;
     background-repeat: no-repeat;
     background-position: 50% 0;
@@ -15,7 +15,7 @@
     .main-header {
       position: fixed;
       top: 0;
-      background: var(--primary-custom-color);
+      background: var(--primary-color);
       padding: 3rem 0;
       margin-top: 0;
       width: 100%;
@@ -70,7 +70,7 @@
   }
 
   .cover {
-    color: var(--primary-contrast-custom-color);;
+    color: var(--primary-contrast-color);;
     text-align: center;
     padding-top: 10rem;
     padding-bottom: 5rem;
@@ -88,8 +88,8 @@
       }
 
       .btn-primary {
-        background-color: var(--secondary-custom-color);
-        color: var(--secondary-contrast-custom-color);
+        background-color: var(--secondary-color);
+        color: var(--secondary-contrast-color);
         padding: 0.5rem 1rem;
         font-size: 1rem;
         border-radius: 0.375rem;
@@ -105,7 +105,7 @@
         &:active {
           transform: scale(0.95);
           box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2);
-          background-color: color-mix(in srgb, var(--secondary-custom-color) 90%, black);
+          background-color: color-mix(in srgb, var(--secondary-color) 90%, black);
         }
 
         .arrow-right {
@@ -113,7 +113,7 @@
           width: 20px;
           align-items: center;
           text-align: center;
-          fill: var(--secondary-contrast-custom-color);
+          fill: var(--secondary-contrast-color);
         }
 
 
@@ -127,7 +127,7 @@
         margin-top: 2.5%;
 
         .btn-link {
-          color: var(--secondary-contrast-custom-color);
+          color: var(--secondary-contrast-color);
           font-size: 2rem;
           text-decoration: none;
           cursor: pointer;
@@ -155,8 +155,8 @@
       }
     }
     &:nth-of-type(2n) {
-      background-color: var(--primary-custom-color);
-      color: var(--primary-contrast-custom-color);
+      background-color: var(--primary-color);
+      color: var(--primary-contrast-color);
       font-size: calc(1.275rem + 0.3vw);
       margin-top: 0;
       font-weight: 500;
@@ -184,8 +184,8 @@
           align-items: center;
           justify-content: center;
           text-align: center;
-          background-color: var(--secondary-custom-color);
-          color: var(--secondary-contrast-custom-color);
+          background-color: var(--secondary-color);
+          color: var(--secondary-contrast-color);
           padding: 0.5rem 1rem;
           border-radius: 0.375rem;
           text-decoration: none;
@@ -202,7 +202,7 @@
           height: 0;
           border-left: 2vw solid transparent;
           border-right: 2vw solid transparent;
-          border-top: 2vw solid var(--primary-custom-color);
+          border-top: 2vw solid var(--primary-color);
           transform: translateX(-50%);
           z-index: 3;
         }
@@ -248,7 +248,7 @@
           display: block;
         }
         .btn-verifier {
-          background-color: var(--primary-custom-color);
+          background-color: var(--primary-color);
           color: #fff;
           padding: 0.5rem 1rem;
           font-size: 1rem;

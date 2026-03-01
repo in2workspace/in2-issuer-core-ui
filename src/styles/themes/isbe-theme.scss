@@ -32,7 +32,8 @@ $primary-contrast-color: #000000;
 $secondary-color: #76F276;
 $secondary-contrast-color: #444444;
 
-@include mat.core();
+@include mat.elevation-classes();
+@include mat.app-background();
 
 
 //Palette for Angular Material components
@@ -82,7 +83,8 @@ $custom-theme: mat.m2-define-light-theme((
     primary: $custom-primary,
     accent: $custom-accent,
     warn: $custom-warn,
-    use-system-variables: true
+    use-system-variables: true,
+    system-variables-prefix: sys,
   ),
   typography: $custom-typography
 ));

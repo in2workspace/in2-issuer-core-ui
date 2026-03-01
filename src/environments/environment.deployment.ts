@@ -18,17 +18,4 @@ export const environment = {
   show_wallet_url_test: window["env"]["show_wallet_url_test"] === "true",
   // Knowledgebase base URL (REQUIRED)
   knowledge_base_url: window["env"]["knowledge_base_url"],
-  customizations:{
-    theme_name: window["env"]["theme_name"],
-    assets: {
-      // Base URL for assets (REQUIRED)
-      base_url: window["env"]["assets_base_url"],
-      // Main app logo name, shown in the navbar (REQUIRED)
-      logo_path: window["env"]["logo_path"],
-      // App favicon. Points to "assets/icons/" (REQUIRED)
-      favicon_path: window["env"]["favicon_path"]
-    },
-    // Default app language (OPTIONAL)
-    default_lang: window["env"]["default_lang"] ?? "en"
-  }
 };

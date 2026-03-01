@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { CredentialOfferComponent } from './credential-offer.component';
 import { TranslateModule } from '@ngx-translate/core';
-import { QRCodeModule } from 'angularx-qrcode';
+import { QRCodeComponent } from 'angularx-qrcode';
 import { NgIf } from '@angular/common';
 import { environment } from 'src/environments/environment';
 
@@ -10,7 +10,7 @@ describe('CredentialOfferComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ NgIf, QRCodeModule, TranslateModule.forRoot(), CredentialOfferComponent],
+      imports: [ NgIf, QRCodeComponent, TranslateModule.forRoot(), CredentialOfferComponent],
     }).compileComponents();
 
     const fixture = TestBed.createComponent(CredentialOfferComponent);

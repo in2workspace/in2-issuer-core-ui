@@ -17,21 +17,20 @@ import { MatIconModule } from '@angular/material/icon';
 import { DialogData } from '../dialog-data';
 import { AbstractDialogComponent } from '../abstract-dialog-component';
 
-@Component({ 
-  selector: 'app-dialog',
-  standalone: true,
-  imports: [
-    AsyncPipe,
-    MatButton,
-    MatDialogTitle,
-    MatDialogContent,
-    MatDialogActions,
-    MatIconModule,
-    MatProgressSpinnerModule,
-    PortalModule,
-    TranslatePipe,
-  ],
-  templateUrl: './dialog.component.html',
+@Component({
+    selector: 'app-dialog',
+    imports: [
+        AsyncPipe,
+        MatButton,
+        MatDialogTitle,
+        MatDialogContent,
+        MatDialogActions,
+        MatIconModule,
+        MatProgressSpinnerModule,
+        PortalModule,
+        TranslatePipe,
+    ],
+    templateUrl: './dialog.component.html'
 })
 export class DialogComponent extends AbstractDialogComponent<DialogData> {
   @ViewChild(CdkPortalOutlet) public portalOutlet!: CdkPortalOutlet;
