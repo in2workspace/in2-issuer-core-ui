@@ -1,6 +1,6 @@
 import { Component, computed, EventEmitter, input, Output } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
-import { QRCodeModule } from 'angularx-qrcode';
+import { QRCodeComponent } from 'angularx-qrcode';
 import { environment } from 'src/environments/environment';
 import { KNOWLEDGEBASE_PATH } from 'src/app/core/constants/knowledge.constants';
 
@@ -8,8 +8,7 @@ import { KNOWLEDGEBASE_PATH } from 'src/app/core/constants/knowledge.constants';
     selector: 'app-credential-offer',
     templateUrl: './credential-offer.component.html',
     styleUrls: ['./credential-offer.component.scss'],
-    standalone: true,
-    imports: [QRCodeModule, TranslatePipe]
+    imports: [QRCodeComponent, TranslatePipe]
 })
 export class CredentialOfferComponent{
   @Output() public refreshCredential = new EventEmitter<void>();
@@ -17,26 +16,35 @@ export class CredentialOfferComponent{
   public walletUsersGuideUrl = environment.knowledge_base_url + KNOWLEDGEBASE_PATH.WALLET;
   public credentialOfferUri$ = input.required<string>();
 
-  public readonly walletSameDeviceUrl = environment.wallet_url + '/tabs/home/';
+  public readonly walletSameDeviceUrl = environment.wallet_url + '/protocol/callback';
   public walletSameDeviceUrl$ = computed<string>(()=>{
-    const cutOfferUri = this.removeProtocol(this.credentialOfferUri$());
-    return this.walletSameDeviceUrl + cutOfferUri
+    const httpsUrl = this.extractCredentialOfferHttpsUrl(this.credentialOfferUri$());
+    return this.walletSameDeviceUrl + '?credential_offer_uri=' + encodeURIComponent(httpsUrl);
   });
 
   //TEST URLS
   public readonly showWalletSameDeviceUrlTest =  environment.show_wallet_url_test;
-  public readonly walletSameDeviceTestUrl = environment.wallet_url_test + '/tabs/home/';
+  public readonly walletSameDeviceTestUrl = environment.wallet_url_test + '/protocol/callback';
 
   public walletSameDeviceTestUrl$ = computed<string>(()=>{
-    const cutOfferUri = this.removeProtocol(this.credentialOfferUri$());
-    return this.walletSameDeviceTestUrl + cutOfferUri
+    const httpsUrl = this.extractCredentialOfferHttpsUrl(this.credentialOfferUri$());
+    return this.walletSameDeviceTestUrl + '?credential_offer_uri=' + encodeURIComponent(httpsUrl);
   });
 
-
-  //currently needed because of backend response
-  public removeProtocol(input: string): string {
-     return input.replace(/:\/\//g, '');
-}
+  /**
+   * Extracts the HTTPS credential offer URL from the openid-credential-offer:// URI.
+   * Input:  openid-credential-offer://?credential_offer_uri=https%3A%2F%2F...
+   * Output: https://...
+   */
+  private extractCredentialOfferHttpsUrl(oid4vciUri: string): string {
+    try {
+      const parsed = new URL(oid4vciUri.replace('openid-credential-offer://', 'https://openid-credential-offer/'));
+      const innerUrl = parsed.searchParams.get('credential_offer_uri');
+      return innerUrl ?? oid4vciUri;
+    } catch {
+      return oid4vciUri;
+    }
+  }
 
 public onRefreshCredentialClick(event:Event): void{
   event.preventDefault();
