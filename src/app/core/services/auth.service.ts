@@ -132,19 +132,18 @@ export class AuthService{
   }
 
 
-  public logout$(): Observable<{}> {
-    console.info('Logout: revoking tokens.');
-
-    return this.oidcSecurityService.logoffAndRevokeTokens().pipe(
-      tap(() => {
-        console.info('Logout with revoke completed.');
-      }),
-      catchError((err:Error)=>{
-        console.error('Error when logging out with revoke.');
-        console.error(err);
-        return throwError(()=>err);
-      })
-    );
+  public logout(): void {
+    console.info('Logout: clearing local session.');
+    this.oidcSecurityService.logoffLocal();
+    this.isAuthenticatedSubject.next(false);
+    this.userDataSubject.next(null);
+    this.tokenSubject.next('');
+    this.mandatorSubject.next(null);
+    this.mandateeEmailSubject.next('');
+    this.nameSubject.next('');
+    this.userPowers = [];
+    sessionStorage.clear();
+    this.router.navigate(['/home']);
   }
 
   public authorize(){
@@ -286,10 +285,6 @@ export class AuthService{
           this.tokenSubject.next(accessToken);
         }
       });
-  }
-
-  public logout() {
-    return this.oidcSecurityService.logoffAndRevokeTokens();
   }
 
   public isLoggedIn(): Observable<boolean> {

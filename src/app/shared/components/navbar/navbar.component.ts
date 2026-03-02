@@ -46,11 +46,7 @@ export class NavbarComponent implements OnInit {
   }
 
   public logout() {
-    this.authService.logout()
-      .pipe(take(1))
-      .subscribe(() => {
-        sessionStorage.clear();
-      });
+    this.authService.logout();
   }
 
   public isCredentialIssuerAndConfigure():boolean {

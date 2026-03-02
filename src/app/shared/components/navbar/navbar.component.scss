@@ -1,10 +1,8 @@
-@import "../.././../../styles/variables";
-
-// todo repeated in home component
+// Navbar uses ONLY brand tokens — this is the tenant-branded chrome area.
 .main-header {
   position: relative;
   top: 0;
-  background: var(--primary-color);
+  background: var(--brand-primary, var(--primary-color));
   padding: 1.1rem 0;
   margin-top: 0;
   width: 100%;
@@ -27,7 +25,7 @@
       }
 
       span {
-        color: var(--primary-contrast-color);
+        color: var(--brand-primary-contrast, var(--primary-contrast-color));
         font-weight: bold;
         font-size: 1.2rem;
         padding-bottom: 3.5px;
@@ -51,7 +49,7 @@
         }
 
         .nav-link {
-          color:  var(--primary-contrast-color);
+          color: var(--brand-primary-contrast, var(--primary-contrast-color));
           text-decoration: none;
           display: flex;
           align-items: center;
@@ -66,9 +64,9 @@
             }
           }
           mat-icon {
-            color: var(--primary-contrast-color);
+            color: var(--brand-primary-contrast, var(--primary-contrast-color));
           }
-          
+
         }
       }
     }

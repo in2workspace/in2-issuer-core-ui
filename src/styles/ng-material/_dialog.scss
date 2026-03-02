@@ -1,26 +1,25 @@
-@import './../variables';
-
 .dialog-custom, .responsive-dialog, .conditional-confirm{
     .mat-mdc-dialog-container .mdc-dialog__surface {
-        border-radius: 8px !important;
+        border-radius: var(--radius-md, 8px) !important;
       }
 
       div[mat-dialog-container]{
-        background-color: white;
+        background-color: var(--surface-card, #ffffff);
     }
 
-    
+
     div[mat-dialog-actions]{
         padding: 24px 24px 24px 18px;
         justify-content: center !important;
         gap: 8px;
-    
+
         button{
             width: 90px;
 
             //cancel button
             &.mat-cancel{
-                background-color: $cancel;
+                background-color: var(--action-secondary, #F3F4F6);
+                color: var(--action-secondary-text, #374151);
             }
                 
 

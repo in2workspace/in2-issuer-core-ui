@@ -1,12 +1,10 @@
-@import "../../../styles/variables";
-
 .landing-page {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 
   .container-nav {
-    background: var(--primary-color);
+    background: var(--brand-primary, var(--brand-primary, var(--primary-color)));
     padding: 1rem 0;
     background-repeat: no-repeat;
     background-position: 50% 0;
@@ -15,7 +13,7 @@
     .main-header {
       position: fixed;
       top: 0;
-      background: var(--primary-color);
+      background: var(--brand-primary, var(--brand-primary, var(--primary-color)));
       padding: 3rem 0;
       margin-top: 0;
       width: 100%;
@@ -41,7 +39,7 @@
           }
 
           span {
-            color: $white;
+            color: var(--brand-primary-contrast, #ffffff);
             font-weight: bold;
             font-size: 1.2rem;
             padding-bottom: 3.5px;
@@ -70,7 +68,7 @@
   }
 
   .cover {
-    color: var(--primary-contrast-color);;
+    color: var(--brand-primary-contrast, var(--brand-primary-contrast, var(--primary-contrast-color)));
     text-align: center;
     padding-top: 10rem;
     padding-bottom: 5rem;
@@ -143,7 +141,7 @@
     position: relative;
     z-index: 1;
     &:first-of-type {
-      background-color: $light-grey;
+      background-color: var(--surface-muted, #E8ECF1);
       font-size: calc(1.275rem + 0.3vw);
       margin-top: 0;
       font-weight: 500;
@@ -155,8 +153,8 @@
       }
     }
     &:nth-of-type(2n) {
-      background-color: var(--primary-color);
-      color: var(--primary-contrast-color);
+      background-color: var(--brand-primary, var(--primary-color));
+      color: var(--brand-primary-contrast, var(--primary-contrast-color));
       font-size: calc(1.275rem + 0.3vw);
       margin-top: 0;
       font-weight: 500;
@@ -202,7 +200,7 @@
           height: 0;
           border-left: 2vw solid transparent;
           border-right: 2vw solid transparent;
-          border-top: 2vw solid var(--primary-color);
+          border-top: 2vw solid var(--brand-primary, var(--primary-color));
           transform: translateX(-50%);
           z-index: 3;
         }
@@ -248,7 +246,7 @@
           display: block;
         }
         .btn-verifier {
-          background-color: var(--primary-color);
+          background-color: var(--brand-primary, var(--primary-color));
           color: #fff;
           padding: 0.5rem 1rem;
           font-size: 1rem;
@@ -268,8 +266,8 @@
   }
 
   .main-footer {
-    background-color: $dark-color;
-    color: $white;
+    background-color: var(--brand-secondary, #132153);
+    color: var(--brand-secondary-contrast, #ffffff);
     padding: 3rem 0;
     margin-top: auto;
     display: flex;
@@ -285,11 +283,11 @@
     }
 
     a {
-      color: $white;
+      color: var(--brand-secondary-contrast, #ffffff);
       text-decoration: none;
       cursor: pointer;
       &:hover {
-        color: color-mix(in srgb, $white 70%, black);
+        opacity: 0.7;
       }
     }
 

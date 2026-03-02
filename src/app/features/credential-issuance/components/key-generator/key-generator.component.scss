@@ -36,8 +36,9 @@ h2{
     justify-content: center;
     padding: 8px 12px;
     gap: 12px;
-    margin: 1px solid black;
-    background-color: rgb(245, 245, 245);
+    border: 1px solid var(--border-default, #D1D5DB);
+    background-color: var(--surface-muted, #E8ECF1);
+    border-radius: var(--radius-sm, 4px);
 }
 
 .key{
@@ -47,18 +48,18 @@ h2{
     overflow-wrap: break-word;
 }
 
-//todo millorar
 .copy-button{
     margin: 0px;
-    border: 1px solid black;
-    background-color: rgba(0, 0, 0, 0.12);
-    border-radius: 4px;
+    border: 1px solid var(--border-strong, #9CA3AF);
+    background-color: var(--action-secondary, #F3F4F6);
+    border-radius: var(--radius-sm, 4px);
     width: 55px;
     height: 28px;
     transition: transform 0.5s ease;
+    cursor: pointer;
 }
 
 .alert{
-    color: red;
-    font-weight: 600px;
+    color: var(--status-error, #DC2626);
+    font-weight: 600;
 }

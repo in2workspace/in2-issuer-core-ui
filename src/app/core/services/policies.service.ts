@@ -27,7 +27,7 @@ export class PoliciesService {
       const dialogRef = this.dialog.openErrorInfoDialog(DialogComponent, errorMessage, errorTitle);
       return dialogRef.afterClosed().pipe(
         take(1),
-        switchMap(() => authFlag ? this.authService.logout() : of(null)),
+        switchMap(() => { if (authFlag) { this.authService.logout(); } return of(null); }),
         switchMap(() => this.router.navigate([redirectUrl])),
         map(() => false) 
       );

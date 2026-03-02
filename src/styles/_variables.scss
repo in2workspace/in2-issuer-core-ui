@@ -1,11 +1,5 @@
-// Reusable neutral colors
-// home footer background color
-$dark-color: #14274a;
-// Light background color for links and hover in footer
+// Neutral colors — used as fallbacks when CSS custom properties are not yet loaded.
+// Prefer using var(--surface-*), var(--text-*), var(--border-*) tokens from ThemeService.
+
 $white: #ffffff;
-// Light grey for background (i.e. for landing page sections or side cards)
-$light-grey: #dde6f6;
-// Neutral background color (i. e. for table rows)
 $bg-neutral-light: whitesmoke;
-// Background color for cancel dialog
-$cancel: rgba(0, 0, 0, 0.12);

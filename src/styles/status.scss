@@ -1,29 +1,29 @@
-// STATUS STYLES
+// STATUS STYLES — uses semantic tokens from ThemeService
 .status-ellipse {
     padding: 5px 10px;
     display: inline-block;
     min-width: 100px;
-    border-radius: 15px;
+    border-radius: var(--radius-full, 9999px);
     color: white;
     text-align: center;
   }
-  
+
   .status-default {
-    background-color: rgb(101, 101, 101);
+    background-color: var(--status-neutral, #6B7280);
   }
-  
+
   .status-valid {
-    background-color: #4caf50;
+    background-color: var(--status-success, #059669);
   }
-  
+
   .status-expired {
-    background-color: #f44336; 
+    background-color: var(--status-error, #DC2626);
   }
 
   .status-revoked {
-    background-color: #f44336;
+    background-color: var(--status-error, #DC2626);
   }
-  
+
   .status-draft {
-    background-color: #ff9800;
+    background-color: var(--status-warning, #D97706);
   }
