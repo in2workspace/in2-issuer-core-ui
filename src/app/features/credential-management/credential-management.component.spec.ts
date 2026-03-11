@@ -163,7 +163,7 @@ describe('CredentialManagementComponent', () => {
     };
     expect(component.dataSource.sortingDataAccessor(mockItem, 'status')).toBe('draft');
     expect(component.dataSource.sortingDataAccessor(mockItem, 'subject')).toBe('subject test');
-    expect(component.dataSource.sortingDataAccessor(mockItem, 'updated')).toBe('2024-10-20');
+    expect(component.dataSource.sortingDataAccessor(mockItem, 'updated')).toBe(Date.parse('2024-10-20'));
     expect(component.dataSource.sortingDataAccessor(mockItem, 'credential_type')).toBe('type test');
     expect(component.dataSource.sortingDataAccessor(mockItem, 'organization_identifier')).toBe('org-abc-123');
     expect(component.dataSource.sortingDataAccessor(mockItem, 'unknown')).toBe('');
