@@ -1,6 +1,6 @@
 {
   "name": "eudistack-issuer-ui",
-  "version": "2.1.13",
+  "version": "2.1.14",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
