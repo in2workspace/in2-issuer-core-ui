@@ -28,8 +28,9 @@ public readonly showNavbar$ = toSignal(this.router.events.pipe(
  ngOnInit(){
   this.languageService.setLanguage();
   this.setFavicon();
+  console.log("TESTING");
  }
-
+ 
  private setFavicon(): void {
   const faviconSrc = environment.customizations.assets.base_url + "/" + environment.customizations.assets.favicon_path;
 
