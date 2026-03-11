@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.14](https://github.com/in2workspace/in2-issuer-ui/releases/tag/v2.1.14)
+- This release does not include any code changes. It was created to republish the Docker image after an issue affecting the image generated for the previous version.
+
 ## [2.1.13](https://github.com/in2workspace/in2-issuer-ui/releases/tag/v2.1.13)
 ### Changed
 - Update revocation endpoint and change the way the way the Credential Status List URL is obtained to make it compatible with BitstringStatusListEntry.
