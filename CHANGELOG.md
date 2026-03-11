@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.1.15](https://github.com/in2workspace/in2-issuer-ui/releases/tag/v2.1.15)
 ### Fixed
-- sort credential list by updated date (desc by default)
+- Sort credential list by updated date (desc by default)
 
 ## [2.1.14](https://github.com/in2workspace/in2-issuer-ui/releases/tag/v2.1.14)
 - This release does not include any code changes. It was created to republish the Docker image after an issue affecting the image generated for the previous version.

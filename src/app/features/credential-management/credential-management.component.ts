@@ -117,24 +117,12 @@ export class CredentialManagementComponent implements OnInit, AfterViewInit {
 
   public ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
 
     this.setDataSortingAccessor();
+    this.dataSource.sort = this.sort;
+
     this.setFilter("subject");
     this.setStringSearchSubscription();
-
-    setTimeout(() => {
-      if (!this.sort) {
-        return;
-      }
-      this.sort.active = 'updated';
-      this.sort.direction = 'desc';
-      this.sort.sortChange.emit({ active: 'updated', direction: 'desc' });
-    });
-    console.log('[ngAfterViewInit] sort state', {
-      active: this.sort.active,
-      direction: this.sort.direction
-    });
   }
 
   public navigateToCreateCredential(): void {
@@ -211,10 +199,6 @@ export class CredentialManagementComponent implements OnInit, AfterViewInit {
         }
         case 'updated': {
           const t = Date.parse(item.credential_procedure.updated);
-          console.log('[sortingDataAccessor] updated value', {
-            raw: item.credential_procedure.updated,
-            timestamp: t
-          });
           return Number.isFinite(t) ? t : 0;
         }
         case 'credential_type': {

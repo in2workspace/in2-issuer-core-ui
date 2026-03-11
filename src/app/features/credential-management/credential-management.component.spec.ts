@@ -149,55 +149,6 @@ describe('CredentialManagementComponent', () => {
     expect(searchSubSpy).toHaveBeenCalledTimes(1);
   });
 
-  it('should set default sort to updated desc after view init (async)', fakeAsync(() => {
-    (component as any).dataSource = {
-      set paginator(_: any) {},
-      set sort(_: any) {},
-    } as any;
-
-    const timeoutSpy = jest.spyOn(window, 'setTimeout' as any);
-
-    component.ngAfterViewInit();
-
-    expect(timeoutSpy).toHaveBeenCalled();
-
-    const callback = timeoutSpy.mock.calls[0][0] as () => void;
-    const sortChange = { emit: jest.fn() } as any;
-    component.sort = {
-      active: '',
-      direction: '',
-      sortChange,
-    } as any;
-
-    callback();
-
-    expect(component.sort.active).toBe('updated');
-    expect(component.sort.direction).toBe('desc');
-    expect(sortChange.emit).toHaveBeenCalledWith({
-      active: 'updated',
-      direction: 'desc',
-    });
-    tick(0);
-  }));
-
-  it('should safely return from default sort setup when sort is undefined', fakeAsync(() => {
-    (component as any).dataSource = {
-      set paginator(_: any) {},
-      set sort(_: any) {},
-    } as any;
-
-    const timeoutSpy = jest.spyOn(window, 'setTimeout' as any);
-
-    component.ngAfterViewInit();
-
-    expect(timeoutSpy).toHaveBeenCalled();
-
-    const callback = timeoutSpy.mock.calls[0][0] as () => void;
-
-    expect(() => callback()).not.toThrow();
-    tick(0);
-  }));
-
   it('should configure sortingDataAccessor correctly (status, subject, updated, credential_type, organization_identifier)', () => {
     component.ngAfterViewInit();
     const mockItem: any = {
