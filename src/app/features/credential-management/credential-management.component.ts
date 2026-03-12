@@ -117,9 +117,10 @@ export class CredentialManagementComponent implements OnInit, AfterViewInit {
 
   public ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
 
     this.setDataSortingAccessor();
+    this.dataSource.sort = this.sort;
+
     this.setFilter("subject");
     this.setStringSearchSubscription();
   }
@@ -197,7 +198,8 @@ export class CredentialManagementComponent implements OnInit, AfterViewInit {
           return item.credential_procedure.subject.toLowerCase();
         }
         case 'updated': {
-          return item.credential_procedure.updated.toLowerCase();
+          const t = Date.parse(item.credential_procedure.updated);
+          return Number.isFinite(t) ? t : 0;
         }
         case 'credential_type': {
           return item.credential_procedure.credential_type.toLowerCase();

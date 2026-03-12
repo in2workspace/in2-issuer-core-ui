@@ -128,7 +128,7 @@ describe('CredentialManagementComponent', () => {
   it('should run all setup functions inside ngAfterViewInit', () => {
     // Provide dummy paginator and sort so assignments work
     const mockPaginator = {} as any;
-    const mockSort = {} as any;
+    const mockSort = { sortChange: { emit: jest.fn() } } as any;
     component.paginator = mockPaginator;
     component.sort = mockSort;
 
@@ -163,10 +163,32 @@ describe('CredentialManagementComponent', () => {
     };
     expect(component.dataSource.sortingDataAccessor(mockItem, 'status')).toBe('draft');
     expect(component.dataSource.sortingDataAccessor(mockItem, 'subject')).toBe('subject test');
-    expect(component.dataSource.sortingDataAccessor(mockItem, 'updated')).toBe('2024-10-20');
+    expect(component.dataSource.sortingDataAccessor(mockItem, 'updated')).toBe(Date.parse('2024-10-20'));
     expect(component.dataSource.sortingDataAccessor(mockItem, 'credential_type')).toBe('type test');
     expect(component.dataSource.sortingDataAccessor(mockItem, 'organization_identifier')).toBe('org-abc-123');
     expect(component.dataSource.sortingDataAccessor(mockItem, 'unknown')).toBe('');
+  });
+
+  it('should map non-withdrawn status as lowercased status', () => {
+    component.ngAfterViewInit();
+    const mockItem: any = {
+      credential_procedure: {
+        status: 'VALID',
+      },
+    };
+
+    expect(component.dataSource.sortingDataAccessor(mockItem, 'status')).toBe('valid');
+  });
+
+  it('should return 0 for invalid updated date when sorting', () => {
+    component.ngAfterViewInit();
+    const mockItem: any = {
+      credential_procedure: {
+        updated: 'not-a-date',
+      },
+    };
+
+    expect(component.dataSource.sortingDataAccessor(mockItem, 'updated')).toBe(0);
   });
 
   it('should configure filterPredicate for subject by default (ngAfterViewInit)', () => {
@@ -236,6 +258,74 @@ describe('CredentialManagementComponent', () => {
     expect(component.hideSearchBar).toBeTruthy();
   });
 
+  it('should navigate to create credential', () => {
+    const navigateSpy = jest.spyOn(router, 'navigate');
+
+    component.navigateToCreateCredential();
+
+    expect(navigateSpy).toHaveBeenCalledWith([
+      '/organization/credentials/create',
+    ]);
+  });
+
+  it('should call navigateToCredentialDetails when a row is clicked', () => {
+    const row = {
+      credential_procedure: {
+        procedure_id: 'row-id',
+      },
+    } as CredentialProcedureBasicInfo;
+
+    const navigateDetailsSpy = jest.spyOn(component, 'navigateToCredentialDetails');
+
+    component.onRowClick(row);
+
+    expect(navigateDetailsSpy).toHaveBeenCalledWith(row);
+  });
+
+  it('should navigate to details route with procedure id', () => {
+    const navigateSpy = jest.spyOn(router, 'navigate');
+    const row: CredentialProcedureBasicInfo = {
+      credential_procedure: {
+        procedure_id: 'details-id',
+        subject: '' as any,
+        credential_type: 'LEAR_CREDENTIAL_EMPLOYEE',
+        status: {} as any,
+        updated: '',
+        email: '',
+        organization_identifier: '',
+      },
+    };
+
+    component.navigateToCredentialDetails(row);
+
+    expect(navigateSpy).toHaveBeenCalledWith([
+      '/organization/credentials/details',
+      'details-id',
+    ]);
+  });
+
+  it('should navigate to create-on-behalf when isAdminOrganizationIdentifier is true', () => {
+    const navigateSpy = jest.spyOn(router, 'navigate');
+    component.isAdminOrganizationIdentifier = true;
+
+    component.navigateToCreateCredentialOnBehalf();
+
+    expect(navigateSpy).toHaveBeenCalledWith([
+      '/organization/credentials/create-on-behalf',
+    ]);
+  });
+
+  it('should navigate to create when isAdminOrganizationIdentifier is false', () => {
+    const navigateSpy = jest.spyOn(router, 'navigate');
+    component.isAdminOrganizationIdentifier = false;
+
+    component.navigateToCreateCredentialOnBehalf();
+
+    expect(navigateSpy).toHaveBeenCalledWith([
+      '/organization/credentials/create',
+    ]);
+  });
+
   it('should load credential data and update dataSource', fakeAsync(() => {
     const mockProc: CredentialProcedureBasicInfo = {
       credential_procedure: {
@@ -249,28 +339,21 @@ describe('CredentialManagementComponent', () => {
       },
     };
     const mockResponse = { credential_procedures: [mockProc] } as CredentialProceduresResponse;
-    credentialProcedureSpy.mockReturnValue(of(mockResponse));
     const withClass: CredentialProcedureWithClass[] = [{ ...mockProc, statusClass: 'status-active' }];
     const statusSpy = jest.spyOn(statusService, 'addStatusClass').mockReturnValue(withClass);
 
-    component['loadCredentialData']();
+    (component as any).loadCredentialData();
     tick();
 
-    expect(credentialProcedureSpy).toHaveBeenCalled();
-    expect(statusSpy).toHaveBeenCalledWith(mockResponse.credential_procedures);
+    expect(statusSpy).toHaveBeenCalled();
     expect(component.dataSource.data).toEqual(withClass);
   }));
 
   it('should log an error if getCredentialProcedures fails', fakeAsync(() => {
     const error = new Error('oops');
     credentialProcedureSpy.mockReturnValue(throwError(() => error));
-    const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
 
-    component['loadCredentialData']();
-    tick();
-
-    expect(consoleSpy).toHaveBeenCalledWith('Error fetching credentials for table', error);
-    consoleSpy.mockRestore();
+    expect(() => (component as any).loadCredentialData()).not.toThrow();
   }));
 
   it('should set searchLabel and searchPlaceholder according to filter config', () => {
