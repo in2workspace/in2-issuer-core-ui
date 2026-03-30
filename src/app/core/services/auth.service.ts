@@ -344,7 +344,7 @@ export class AuthService {
   }
 
   public logout() {
-    return this.oidcSecurityService.logoffAndRevokeTokens();
+    return this.oidcSecurityService.logoff();
   }
 
   public isLoggedIn(): Observable<boolean> {
