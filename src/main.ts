@@ -48,7 +48,7 @@ bootstrapApplication(AppComponent, {
             }
         }), AuthModule.forRoot({
             config: {
-                // Add "logLevel: 1" to see library logs
+                logLevel: 1,
                 postLoginRoute: IAM_POST_LOGIN_ROUTE,
                 authority: "https://verifier.green.eudistack.net",
                 redirectUrl: IAM_REDIRECT_URI,
@@ -61,6 +61,7 @@ bootstrapApplication(AppComponent, {
                 historyCleanupOff: false,
                 ignoreNonceAfterRefresh: true,
                 triggerRefreshWhenIdTokenExpired: false,
+                autoUserInfo: false,
                 secureRoutes: [environment.server_url, environment.iam_url, "https://verifier.green.eudistack.net"].filter((route): route is string => route !== undefined)
             },
         })),
