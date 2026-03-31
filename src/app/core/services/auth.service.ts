@@ -344,7 +344,8 @@ export class AuthService {
   }
 
   public logout() {
-    return this.oidcSecurityService.logoff();
+    this.router.navigate(['/home']);
+    return this.oidcSecurityService.logoffLocal();
   }
 
   public isLoggedIn(): Observable<boolean> {
