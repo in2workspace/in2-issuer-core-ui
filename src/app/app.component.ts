@@ -28,6 +28,7 @@ public readonly showNavbar$ = toSignal(this.router.events.pipe(
  ngOnInit(){
   this.languageService.setLanguage();
   this.setFavicon();
+  console.log("V2.1.15");
  }
 
  private setFavicon(): void {

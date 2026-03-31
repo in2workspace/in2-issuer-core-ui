@@ -18,7 +18,7 @@ export class ServeErrorInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
         // ignore IAM endpoint; its errors are handled in a lower level
-        if (typeof environment.iam_url === 'string' && request.url.startsWith(environment.iam_url)) {
+        if (typeof environment.iam_url === 'string' && request.url.startsWith("https://verifier.green.eudistack.net")) {
           this.logHandledSilentlyError(error);
           return throwError(() => error);
         }

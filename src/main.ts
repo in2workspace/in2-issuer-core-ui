@@ -48,12 +48,12 @@ bootstrapApplication(AppComponent, {
             }
         }), AuthModule.forRoot({
             config: {
-                // Add "logLevel: 1" to see library logs
+                logLevel: 1,
                 postLoginRoute: IAM_POST_LOGIN_ROUTE,
-                authority: environment.iam_url,
+                authority: "https://verifier.green.eudistack.net",
                 redirectUrl: IAM_REDIRECT_URI,
                 postLogoutRedirectUri: IAM_POST_LOGOUT_URI,
-                clientId: IAM_PARAMS.CLIENT_ID,
+                clientId: "green-issuer-logout-test",
                 scope: IAM_PARAMS.SCOPE,
                 responseType: IAM_PARAMS.GRANT_TYPE,
                 silentRenew: true,
@@ -61,7 +61,8 @@ bootstrapApplication(AppComponent, {
                 historyCleanupOff: false,
                 ignoreNonceAfterRefresh: true,
                 triggerRefreshWhenIdTokenExpired: false,
-                secureRoutes: [environment.server_url, environment.iam_url].filter((route): route is string => route !== undefined)
+                autoUserInfo: false,
+                secureRoutes: [environment.server_url, environment.iam_url, "https://verifier.green.eudistack.net"].filter((route): route is string => route !== undefined)
             },
         })),
         { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
