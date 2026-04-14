@@ -14,11 +14,7 @@ const statusHasSingCredentialButtonArr: LifeCycleStatus[] = ['PEND_SIGNATURE'];
 const statusHasRevokeCredentialButtonArr: LifeCycleStatus[] = ['VALID'];
 
 export function statusByTypeHasSendReminderButton(type: CredentialType, status: LifeCycleStatus): boolean {
-    const validStatuses = statusByTypeHasSendReminderButtonRecord[type].includes(status);
-    console.log("Checking if status ", status, " is in valid statuses ", validStatuses, " for credential type ", type);
-    const isValid = statusByTypeHasSendReminderButtonRecord[type].includes(status);
-    console.log("Is valid for type ", type, ": ", isValid);
-  return isValid;
+  return statusByTypeHasSendReminderButtonRecord[type].includes(status);
 }
 
 export function credentialTypeHasSignCredentialButton(type: CredentialType): boolean{
