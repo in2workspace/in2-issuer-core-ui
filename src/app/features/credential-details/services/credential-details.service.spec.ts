@@ -300,8 +300,9 @@ describe('CredentialDetailsService', () => {
       it('should return false when no type or status', () => {
         service.credentialProcedureDetails$.set({
           lifeCycleStatus: undefined,
-          credential: { vc: { type: [], validFrom: '', validUntil: '', credentialStatus: undefined } }
+          credential: { vc: undefined }
         } as any);
+
         expect(service.showReminderButton$()).toBe(false);
       });
 
