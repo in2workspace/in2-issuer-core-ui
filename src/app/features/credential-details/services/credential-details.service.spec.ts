@@ -296,9 +296,84 @@ describe('CredentialDetailsService', () => {
       expect(service.showRevokeCredentialButton$()).toBe(false);
     });
 
+    describe('showReminderButton$', () => {
+      it('should return false when no type or status', () => {
+        service.credentialProcedureDetails$.set({
+          lifeCycleStatus: undefined,
+          credential: { vc: undefined }
+        } as any);
+
+        expect(service.showReminderButton$()).toBe(false);
+      });
+
+      it('should return true for LEARCredentialEmployee with WITHDRAWN status', () => {
+        service.credentialProcedureDetails$.set({
+          lifeCycleStatus: 'WITHDRAWN',
+          credential: { vc: { type: ['LEARCredentialEmployee'], validFrom: '', validUntil: '', credentialStatus: undefined } }
+        } as any);
+        expect(service.showReminderButton$()).toBe(true);
+      });
+
+      it('should return true for LEARCredentialEmployee with DRAFT status', () => {
+        service.credentialProcedureDetails$.set({
+          lifeCycleStatus: 'DRAFT',
+          credential: { vc: { type: ['LEARCredentialEmployee'], validFrom: '', validUntil: '', credentialStatus: undefined } }
+        } as any);
+        expect(service.showReminderButton$()).toBe(true);
+      });
+
+      it('should return true for LEARCredentialEmployee with PEND_DOWNLOAD status', () => {
+        service.credentialProcedureDetails$.set({
+          lifeCycleStatus: 'PEND_DOWNLOAD',
+          credential: { vc: { type: ['LEARCredentialEmployee'], validFrom: '', validUntil: '', credentialStatus: undefined } }
+        } as any);
+        expect(service.showReminderButton$()).toBe(true);
+      });
+
+      it('should return false for LEARCredentialEmployee with VALID status', () => {
+        service.credentialProcedureDetails$.set({
+          lifeCycleStatus: 'VALID',
+          credential: { vc: { type: ['LEARCredentialEmployee'], validFrom: '', validUntil: '', credentialStatus: undefined } }
+        } as any);
+        expect(service.showReminderButton$()).toBe(false);
+      });
+
+      it('should return true for gx:LabelCredential with VALID status (NEW)', () => {
+        service.credentialProcedureDetails$.set({
+          lifeCycleStatus: 'VALID',
+          credential: { vc: { type: ['gx:LabelCredential'], validFrom: '', validUntil: '', credentialStatus: undefined } }
+        } as any);
+        expect(service.showReminderButton$()).toBe(true);
+      });
+
+      it('should return true for gx:LabelCredential with WITHDRAWN status', () => {
+        service.credentialProcedureDetails$.set({
+          lifeCycleStatus: 'WITHDRAWN',
+          credential: { vc: { type: ['gx:LabelCredential'], validFrom: '', validUntil: '', credentialStatus: undefined } }
+        } as any);
+        expect(service.showReminderButton$()).toBe(true);
+      });
+
+      it('should return false for VerifiableCertification regardless of status', () => {
+        service.credentialProcedureDetails$.set({
+          lifeCycleStatus: 'WITHDRAWN',
+          credential: { vc: { type: ['VerifiableCertification'], validFrom: '', validUntil: '', credentialStatus: undefined } }
+        } as any);
+        expect(service.showReminderButton$()).toBe(false);
+      });
+
+      it('should return true for LEARCredentialMachine with PEND_DOWNLOAD status', () => {
+        service.credentialProcedureDetails$.set({
+          lifeCycleStatus: 'PEND_DOWNLOAD',
+          credential: { vc: { type: ['LEARCredentialMachine'], validFrom: '', validUntil: '', credentialStatus: undefined } }
+        } as any);
+        expect(service.showReminderButton$()).toBe(true);
+      });
+    });
+
      it('showActionsButtonsContainer$() és true si almenys un botó està visible', () => {
       service.credentialProcedureDetails$.set({
-        lifeCycleStatus: 'ANY',
+        lifeCycleStatus: 'PEND_SIGNATURE',
         credential: { vc: { type: ['LEARCredentialEmployee'], validFrom: '', validUntil: '', credentialStatus: 'OK' } }
       } as any);
 

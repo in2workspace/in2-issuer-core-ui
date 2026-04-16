@@ -12,7 +12,7 @@ import { EvaluatedExtendedDetailsField, ViewModelSchema, EvaluatedViewModelSchem
 import { LifeCycleStatusService } from 'src/app/shared/services/life-cycle-status.service';
 import { CredentialActionsService } from './credential-actions.service';
 import { StatusClass } from 'src/app/core/models/entity/lear-credential-management';
-import { statusHasSendReminderlButton, credentialTypeHasSendReminderButton, statusHasSignCredentialButton, credentialTypeHasSignCredentialButton, statusHasRevokeCredentialButton, credentialTypeHasRevokeCredentialButton } from '../helpers/actions-helpers';
+import { statusHasSignCredentialButton, credentialTypeHasSignCredentialButton, statusHasRevokeCredentialButton, credentialTypeHasRevokeCredentialButton, statusByTypeHasSendReminderButton } from '../helpers/actions-helpers';
 import { DialogComponent } from 'src/app/shared/components/dialog/dialog-component/dialog.component';
 
 
@@ -59,12 +59,11 @@ export class CredentialDetailsService {
     const type = this.credentialType$();
     const status = this.lifeCycleStatus$();
 
-    return !!(
-      status 
-      && statusHasSendReminderlButton(status)
-      && type 
-      && credentialTypeHasSendReminderButton(type)
-    );
+    if (!type || !status) {
+      return false;
+    }
+
+    return statusByTypeHasSendReminderButton(type, status);
   });
   
   public showSignCredentialButton$ = computed<boolean>(()=>{
