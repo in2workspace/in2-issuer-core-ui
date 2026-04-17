@@ -21,7 +21,6 @@ describe('LearCredentialMachineIssuanceSchemaProvider', () => {
   let countryMock: jest.Mocked<CountryService>;
   const fakeCountries = [{ label: 'C', value: 'c' }];
 
-  // build a fake mandator object whose keys cover mandatorFieldsOrder
   const fakeMandatorRaw: Record<string, string> = {};
   for (const k of fieldsHelpers.employeeMandatorFieldsOrder) {
     fakeMandatorRaw[k] = `val-${k}`;
@@ -36,7 +35,6 @@ describe('LearCredentialMachineIssuanceSchemaProvider', () => {
       getCountriesAsSelectorOptions: jest.fn().mockReturnValue(fakeCountries),
     } as any;
 
-    // mock convertToOrderedArray to respect any[]
     jest
       .spyOn(fieldsHelpers, 'convertToOrderedArray')
       .mockImplementation((obj: any, order: any[]) =>
@@ -57,7 +55,7 @@ describe('LearCredentialMachineIssuanceSchemaProvider', () => {
   });
 
   describe('getSchema()', () => {
-    let schema: CredentialIssuanceTypedViewModelSchema<"LEARCredentialMachine">;
+    let schema: CredentialIssuanceTypedViewModelSchema<'LEARCredentialMachine'>;
 
     beforeEach(() => {
       schema = service.getSchema();
@@ -109,7 +107,10 @@ describe('LearCredentialMachineIssuanceSchemaProvider', () => {
       expect(staticData).toHaveProperty('mandator');
 
       expect(staticData!.mandator).toEqual(
-        fieldsHelpers.employeeMandatorFieldsOrder.map(k => ({ key: k, value: fakeMandatorRaw[k] }))
+        fieldsHelpers.employeeMandatorFieldsOrder.map(k => ({
+          key: k,
+          value: fakeMandatorRaw[k],
+        }))
       );
 
       const fields = mandator?.groupFields;
@@ -136,17 +137,20 @@ describe('LearCredentialMachineIssuanceSchemaProvider', () => {
         component: IssuancePowerComponent,
         data: [
           {
-            action: ['Execute'],
-            function: 'Onboarding',
+            action: ['Create', 'Update', 'Delete'],
+            function: 'ProductOffering',
             isAdminRequired: false,
           },
           {
-            action: [
-                "Upload"
-            ],
-            function: "Certification",
-            isAdminRequired: true
-            }
+            action: ['Execute'],
+            function: 'Onboarding',
+            isAdminRequired: true,
+          },
+          {
+            action: ['Upload'],
+            function: 'Certification',
+            isAdminRequired: true,
+          },
         ],
       });
     });
