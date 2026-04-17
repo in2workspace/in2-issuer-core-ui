@@ -108,9 +108,18 @@ export class LearCredentialMachineIssuanceSchemaProvider implements CredentialIs
           component: IssuancePowerComponent,
           data: [
                 {
+                  action: [
+                      "Create",
+                      "Update",
+                      "Delete",
+                  ],
+                  function: "ProductOffering",
+                  isAdminRequired: false
+                },
+                {
                   action: ['Execute'],
                   function: 'Onboarding',
-                  isAdminRequired: false
+                  isAdminRequired: true
                 },
                 {
                   action: [
